@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'blog:edit_action' %}" method="POST">
+    {% csrf_token %}
+    {% if article %}
+    <input type="hidden" name="article_id" value="{{article.id}}">
+    <label>文章标题</label>
+    <input type="text" name="title" value="{{article.title}}"/>
+    <br/>
+    <label>文章内容</label>
+    <input type="text" name="content" value="{{article.content}}"/>
+    <br/>
+    {% else %}
+    <label>文章标题</label>
+    <input type="text" name="title"/>
+    <br/>
+    <label>文章内容</label>
+    <input type="text" name="content"/>
+    <br/>
+    {% endif %}
+    <input type="submit" value="提交">
+</form>
+
+
+<form action="{% url 'blog:edit_action' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="article_id" value="{{article.id | default:'0'}}">
+    <label>文章标题</label>
+    <input type="text" name="title" value="{{article.title}}"/>
+    <br/>
+    <label>文章内容</label>
+    <input type="text" name="content" value="{{article.content}}"/>
+    <br/>
+    <input type="submit" value="提交">
+</form>
+
+
+
+</body>
+</html>
